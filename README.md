@@ -7,10 +7,17 @@ Contributed By Pugazh
 
 It is a python utility to download data from the Nasa power website and convert the downloaded file into the .WTH file for DSSAT.
 ##################################################################################################################################
+Run nasa_wth.py
+##################################################################################################################################
 
 
 
 Requirements......   1.Good Internet Connection...
+
+
+
+
+
 
 ###############
 It has two parts 
