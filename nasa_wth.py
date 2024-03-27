@@ -10,7 +10,7 @@ def check_and_install(package):
         subprocess.check_call(["pip", "install", package])
 
 # List of required packages
-required_packages = ["tkinter", "webbrowser"]
+required_packages = ["tkinter", "webbrowser","pandas","requests"]
 
 # Check and install each package
 for package in required_packages:
