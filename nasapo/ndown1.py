@@ -45,8 +45,8 @@ def down(dzz,csv,sdate,edate):
             #print(df)
             df = df.iloc[:, 2:]
             df.columns = ['TMAX','TMIN','SRAD','RAIN']
-            start_date = datetime(2022, 6, 1)
-            end_date = datetime(2023, 9, 30)
+            start_date = ssdate
+            end_date = eedate
             date_range = pd.date_range(start_date, end_date, periods=len(df))
             df.insert(0, 'DATE', date_range.strftime('%Y/%m/%d'))
             #print(df[240:])
