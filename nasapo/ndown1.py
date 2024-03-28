@@ -41,7 +41,7 @@ def down(dzz,csv,sdate,edate):
             # Save the CSV data to a file
             with open(filepath, 'wb') as file_object:
                 file_object.write(response.content)
-            df = pd.read_csv(filepath, skiprows=range(0, 14))
+            df = pd.read_csv(filepath, skiprows=range(0, 12))
             #print(df)
             df = df.iloc[:, 2:]
             df.columns = ['TMAX','TMIN','SRAD','RAIN']
