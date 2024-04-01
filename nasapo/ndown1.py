@@ -17,7 +17,8 @@ def down(dzz,csv,sdate,edate):
     output = dzz
     #output = os.path.join(current_directory, folder_name)
     
-    place = pd.read_csv(csv)
+    place1 = pd.read_csv(csv)
+    place = place1.sort_values(by='Location_Name', ascending=True)
     for index, row in place.iterrows():
         # Get latitude and longitude from the CSV
         latitude = row["Latitude"]
@@ -35,7 +36,7 @@ def down(dzz,csv,sdate,edate):
         inde += 1
     
         if response.status_code == 200:
-            filename = f"{dis[:3]}{fsn}.csv"
+            filename = f"{dis[:3]}{fsn}_{latitude}_{longitude}.csv"
             filepath = os.path.join(output, filename)
             
             # Save the CSV data to a file
