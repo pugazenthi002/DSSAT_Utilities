@@ -10,7 +10,7 @@ def check_and_install(package):
         subprocess.check_call(["pip", "install", package])
 
 # List of required packages
-required_packages = ["tkinter", "webbrowser","pandas","requests"]
+required_packages = ["tkinter", "webbrowser","pandas","requests","pillow"]
 
 # Check and install each package
 for package in required_packages:
@@ -177,6 +177,7 @@ class GUI:
             sdate = self.date_entry1.get()
             edate = self.date_entry2.get()
             down(dzz,csv,sdate,edate)
+            self.error_label.config(text="DONE DOWNLOADING")
         else:
             self.error_label.config(text="No folder Selected or CSV File Selected")
     def convert_wth(self):
@@ -184,6 +185,7 @@ class GUI:
         if directory:
             dzz = self.folder_var1.get()
             main(dzz,directory)
+            self.error_label.config(text="DONE CONVERSION")
         else:
             self.error_label.config(text="No folder Selected")
 
