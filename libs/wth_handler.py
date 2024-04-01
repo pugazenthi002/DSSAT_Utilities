@@ -11,7 +11,6 @@ file_header = """$WEATHER DATA : TNAU
    TNAU   11.000   77.000   xx427   -99.0   -99.0   -99.0   -99.0
 @  DATE    SRAD    TMAX    TMIN    RAIN    DEWP    WIND     PAR    EVAP    RHUM"""
 
-coordi_csv='TN-Dist-wth-name.csv'
 column_widths=[7, 8, 8, 8, 8, 8, 8, 8, 8, 8]
 input_date_format='%Y/%m/%d' #'%d/%m/%Y'
 
@@ -21,7 +20,7 @@ def format_wth(directory,csv_file,out_headers,in_headers):
     data=data.rename(columns=dict(zip(data.columns,in_headers)))
     data=data.reindex(columns=in_headers, fill_value=-99.0)
     tav,tamp=calculate_tav(data)
-    lat,lon,elev=get_coord(coordi_csv,csv_file.rsplit('.',1)[0]) 
+    lat,lon,elev=get_coord(csv_file) 
     wth_header=create_header(tav,tamp,lat,lon,elev,file_header,csv_file)
     date_format(data)
     data=data[out_headers]
@@ -48,12 +47,15 @@ def gen_outfile_name(data_in,in_filename):
     out_name=prefix.upper()+str(syear)[2:]+str(nyears)+".WTH"
     return out_name
     
-def get_coord(coord_csv,in_csv):
-    details=pd.read_csv(coord_csv)
-    details=details.set_index(['Name'])
-    coords=details.loc[in_csv]
-    lat=f"{coords.lat:6.3f}"
-    long=f"{coords.lon:6.3f}"
+def get_coord(csv_file):
+    #details=pd.read_csv(coord_csv)
+    #details=details.set_index(['Name'])
+    #coords=details.loc[in_csv]
+    coords=csv_file.rsplit('_')
+    lat1=float(coords[1])
+    lon1=float(coords[2].rsplit('.', 1)[0])
+    lat=f"{lat1:6.3f}"
+    long=f"{lon1:6.3f}"
     elev=get_elev(lat,long)
     return lat,long,elev   
 
