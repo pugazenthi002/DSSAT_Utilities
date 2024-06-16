@@ -9,7 +9,7 @@ def down(dzz,csv,sdate,edate):
     ssdate = sssdate.strftime("%Y%m%d")
     eedate=(datetime.strptime(edate, "%d/%m/%Y")).strftime("%Y%m%d")
     
-    base_url = r"https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN,ALLSKY_SFC_SW_DWN,PRECTOTCORR&community=AG&longitude={longitude}&latitude={latitude}&start={sdate}&end={edate}&format=CSV"
+    base_url = r"https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M_MAX,T2M_MIN,ALLSKY_SFC_SW_DWN,PRECTOTCORR,RH2M,WS2M&community=AG&longitude={longitude}&latitude={latitude}&start={sdate}&end={edate}&format=CSV"
     previous_dis = None
     #current_directory = current_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     #folder_name = "in"
@@ -42,7 +42,7 @@ def down(dzz,csv,sdate,edate):
             # Save the CSV data to a file
             with open(filepath, 'wb') as file_object:
                 file_object.write(response.content)
-            df = pd.read_csv(filepath, skiprows=range(0, 12))
+            df = pd.read_csv(filepath, skiprows=range(0, 14))
             #print(df)
             df = df.iloc[:, 2:]
             df.columns = ['TMAX','TMIN','SRAD','RAIN']
